@@ -1,0 +1,13 @@
+// ~/.config/niri/config.kdl
+//
+// Settings for niri desktop environment
+//
+
+// load external config
+include optional=true "dms-config.kdl"
+
+// load my config
+include "my-windowrules.kdl"
+include "my-binds.kdl"
+include "my-config.kdl" 
+
