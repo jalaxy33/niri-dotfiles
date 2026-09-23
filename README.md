@@ -8,11 +8,14 @@ niri 使用 [DMS](https://danklinux.com/) 预设。如果需要使用我的配�
 
 - `fish` 用户友好的交互式 shell
 - `kitty` 终端模拟器
+- `thunar` xfce的文件管理器
 - `imv` 图片查看器
 - `satty` 截图编辑
 - `wl-clipboard` 提供更丰富的剪贴板功能，配合实现截图编辑
 - `ttf-jetbrains-maple-mono-nf-xx-xx` 等宽字体，用于 kitty 的字体配置
 - 浏览器：我用的是 brave，此配置也支持稳定版的 firefox、chrome 和 zen
+
+如果你使用的是 archlinux，在拉取配置并刷新终端后，运行 `check-niri-dependencies` 可自动检查并安装缺失的依赖。
 
 ## 使用方法
 
