@@ -1,13 +1,11 @@
 // ~/.config/niri/config.kdl
 //
-// Settings for niri desktop environment
+// niri配置入口。遵循「后来者覆盖」的原则。
 //
 
-// load external config
+// 加载dms配置
 include optional=true "dms-config.kdl"
 
-// load my config
-include "my-windowrules.kdl"
-include "my-binds.kdl"
+// 加载我的配置，覆盖重复选项
 include "my-config.kdl" 
 

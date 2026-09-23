@@ -1,8 +1,16 @@
 // ~/.config/niri/my-config.kdl
 // 
-// 这里是我的 niri 设置，放到 `~/.config/niri/config.kdl` 最后覆盖默认设置
+// 这里是我的 niri 设置，将本文件以及 `myniri/` 目录放到 `~/.config/niri/` 下，
+// 并在 `~/.config/niri/config.kdl` 最后写入下句，覆盖默认设置
 //    include "my-config.kdl" 
 //
+
+//--- 加载子配置 ---
+//
+include "./myniri/my-binds.kdl"
+include "./myniri/my-windowrules.kdl"
+include "./myniri/my-recentwindow.kdl"
+
 
 //--- 环境变量 ---
 //
@@ -31,37 +39,6 @@ prefer-no-csd
 debug {
 	// 放宽聚焦拦截，修复点击托盘程序无法跳转聚焦的问题。
 	honor-xdg-activation-with-invalid-serial
-}
-
-//--- 任务切换视图 ---
-//
-recent-windows {
-  // 取消//off的注释可以禁用
-  // off
-  debounce-ms 750
-  open-delay-ms 150
-
-  highlight {
-    // 缩略图背景内间距
-    padding 30
-    // 缩略图的背景圆角
-    corner-radius 12
-  }
-
-  //设置缩略图大小
-  previews {
-      max-height 480
-      max-scale 0.2
-  }
-
-  binds {
-      // scope可以设置显示的窗口是当前工作区的、还是当前显示器的、或者显示全部窗口
-      Mod+Tab         { next-window scope="workspace"; }
-      Mod+Shift+Tab   { previous-window scope="workspace"; }
-      // grave是波浪键，显示当前应用的所有窗口
-      Mod+grave       { next-window     filter="app-id"; }
-      Mod+Shift+grave { previous-window filter="app-id"; }
-  }
 }
 
 
