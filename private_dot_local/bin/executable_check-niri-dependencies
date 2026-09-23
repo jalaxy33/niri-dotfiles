@@ -59,6 +59,7 @@ aur_depends=(
 
 echo "${BOLD}Niri dependes on: ${RESET}"
 echo "    ${CYAN}${dependencies[@]}${RESET}"
+echo "    ${CYAN}${aur_depends[@]}${RESET}"
 
 # 只在支持的系统上安装
 if [[ -f /etc/os-release ]]; then
