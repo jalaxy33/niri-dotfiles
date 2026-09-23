@@ -65,7 +65,7 @@ niri 使用 [DMS](https://danklinux.com/) 预设。如果需要使用我的配�
 - 进入 chezmoi 管理仓库后用 git 处理：
 
   ```sh
-  nirichezmoi cd
+  chezmoi cd -S ~/.local/share/chezmoi-niri/
   git <command>
   exit
   ```
