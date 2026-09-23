@@ -1,128 +1,71 @@
 # My Niri dotfiles
 
-Dotfiles for [niri](https://github.com/niri-wm/niri), a scrollable-tiling Wayland compositor. Managed by [chezmoi](https://www.chezmoi.io/).
+我的 [niri](https://github.com/niri-wm/niri) 配置，使用 [chezmoi](https://www.chezmoi.io/) 管理。
 
-## Usage
+## 使用的软件
 
-Set a command alias for chezmoi environment specific for niri dotfiles:
+niri 使用 [DMS](https://danklinux.com/) 预设。如果需要使用我的配置，请安装以下软件，或者自行调整相应的配置：
 
-```sh
-alias nirichezmoi="chezmoi -S ~/.local/share/chezmoi-niri/"
-```
+- `fish` 用户友好的交互式 shell
+- `kitty` 终端模拟器
+- `imv` 图片查看器
+- `satty` 截图编辑
+- `wl-clipboard` 提供更丰富的剪贴板功能，配合实现截图编辑
+- `ttf-jetbrains-maple-mono-nf-xx-xx` 等宽字体，用于 kitty 的字体配置
+- 浏览器：我用的是 brave，此配置也支持稳定版的 firefox、chrome 和 zen
 
-### Load configs from this repo
+## 使用方法
 
-- Load configs from my Github dotfiles repo on a new, empty machine:
+> 为了不包含与 niri 无关的配置，使用 `-S` 参数指定 chezmoi 管理目录为 `~/.local/share/chezmoi-niri/`，不干扰其他配置备份。
 
-  ```sh
-  nirichezmoi init --apply https://github.com/jalaxy33/niri-dotfiles
-  ```
+使用我的配置：
 
-  <details>
-  <summary>Easier sync for CN user</summary>
-
-  ```sh
-  nirichezmoi init --apply https://gh-proxy.org/https://github.com/jalaxy33/niri-dotfiles
-  ```
-  </details>
-
-- Updating configs on any machine:
+- 在新机器上从 Github 上拉取配置
 
   ```sh
-  nirichezmoi update
+  chezmoi init -S ~/.local/share/chezmoi-niri/ --apply https://github.com/jalaxy33/niri-dotfiles
   ```
 
-- Update certain config file, for example:
+  > <details><summary>如果你在国内</summary>
+  >
+  > ```sh
+  > chezmoi init -S ~/.local/share/chezmoi-niri/ --apply https://gh-proxy.org/https://github.com/jalaxy33/niri-dotfiles
+  > ```
+  >
+  > </details>
+
+- 将所有配置与远程同步：
 
   ```sh
-  nirichezmoi apply ~/.bashrc
+  chezmoi update -S ~/.local/share/chezmoi-niri/
   ```
 
-### Sync with local changes
-
-- Manage new configs:
+- 只同步某个文件：
 
   ```sh
-  nirichezmoi add </path/to/config_file>
+  chezmoi apply -S ~/.local/share/chezmoi-niri/ <path-to-file>
   ```
 
-- After editing local configs, update all chezmoi managed configs by:
+查看配置差异：
+
+- 查看有哪些文件发生了变动：
 
   ```sh
-  nirichezmoi re-add
+  chezmoi status -S ~/.local/share/chezmoi-niri/
   ```
 
-- Commit and push changes
+- 查看具体差异：
+
+  ```sh
+  chezmoi diff -S ~/.local/share/chezmoi-niri/
+  ```
+
+处理配置冲突：
+
+- 进入 chezmoi 管理仓库后用 git 处理：
 
   ```sh
   nirichezmoi cd
-  git add -A
-  git commit -m "<commit messages>"
-  git push
+  git <command>
   exit
-  ```
-
-### Check difference with managed files
-
-- Check changed files:
-
-  ```sh
-  nirichezmoi status
-  ```
-
-- Check differences
-
-  ```sh
-  nirichezmoi diff
-  ```
-
-### Ignore files
-
-Edit `.chezmoiignore`:
-
-```sh
-nirichezmoi cd
-vi .chezmoiignore
-```
-
-Add files you want to ignore:
-
-```.gitignore
-README.md
-```
-
-### Manage machine-to-machine differences
-
-Use [template](https://www.chezmoi.io/user-guide/templating/#editing-a-template-file) to manage machine-to-machine differences.
-
-- Add files as template, for example:
-
-  ```sh
-  nirichezmoi add --template ~/.zshrc
-  ```
-
-  If a file is already managed by chezmoi, but is not a template, you can make it a template by:
-
-  ```sh
-  nirichezmoi chattr +template ~/.zshrc
-  ```
-
-- Edit a template file:
-
-  ```sh
-  nirichezmoi edit ~/.zshrc
-  ```
-
-  Check [this tutorial](https://www.chezmoi.io/user-guide/manage-machine-to-machine-differences/) for use cases.
-
-- Check template variables:
-
-  ```sh
-  nirichezmoi data
-  ```
-
-- Test templates:
-
-  ```sh
-  nirichezmoi execute-template '{{ .chezmoi.hostname }}'
   ```
