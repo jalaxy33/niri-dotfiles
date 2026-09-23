@@ -33,6 +33,13 @@ BG_MAGENTA=$(tput setab 5)
 BG_CYAN=$(tput setab 6)
 BG_WHITE=$(tput setab 7)
 
+command_exists() {
+  [[ $# -eq 1 ]] || {
+    echo "Usage: command_exists <command_name>" >&2
+    return 2
+  }
+  command -v "$1" >/dev/null 2>&1
+}
 
 dependencies=(
   "fish"
@@ -41,10 +48,13 @@ dependencies=(
   "imv"
   "satty"
   "wl-clipboard"
-  "ttf-jetbrains-maple-mono-nf-xx-xx"
   # GTK主题
   "adw-gtk-theme"
   "nwg-look"
+)
+
+aur_depends=(
+  "ttf-jetbrains-maple-mono-nf-xx-xx"
 )
 
 echo "${BOLD}Niri dependes on: ${RESET}"
@@ -61,6 +71,20 @@ if [[ -f /etc/os-release ]]; then
     echo "${BOLD}${GREEN}Running${RESET}: sudo pacman -S --needed ${CYAN}${dependencies[@]}${RESET}"
     echo ""
     sudo pacman -S --needed "${dependencies[@]}"
+
+    echo ""
+    if command_exists paru; then
+      echo "${BOLD}${GREEN}Running${RESET}: paru -S --needed ${CYAN}${aur_depends[@]}${RESET}"
+      echo ""
+      paru -S --needed "${aur_depends[@]}"
+    elif command_exists yay; then
+      echo "${BOLD}${GREEN}Running${RESET}: yay -S --needed ${CYAN}${aur_depends[@]}${RESET}"
+      echo ""
+      yay -S --needed "${aur_depends[@]}"
+    else
+      echo "${YELLOW}WARNING:${RESET} No AUR helpers found. Please install either 'paru' or 'yay'!"
+    fi
+
     echo ""
     echo "${BOLD}==== DONE ====${RESET}"
   fi
