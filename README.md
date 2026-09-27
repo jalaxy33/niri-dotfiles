@@ -15,13 +15,17 @@ niri 使用 [DMS](https://danklinux.com/) 预设。如果需要使用我的配�
 - `ttf-jetbrains-maple-mono-nf-xx-xx` 等宽字体，用于 kitty 的字体配置
 - 浏览器：我用的是 brave，此配置也支持稳定版的 firefox、chrome 和 zen
 
-如果你使用的是 archlinux，在拉取配置并刷新终端后，运行 `ensure-niri-depends` 可自动检查并安装缺失的依赖。
-
 ## 使用方法
 
-> 为了不包含与 niri 无关的配置，使用 `-S` 参数指定 chezmoi 管理目录为 `~/.local/share/chezmoi-niri/`，不干扰其他配置备份。
+说明：
 
-使用我的配置：
+- 为了不包含与 niri 无关的配置，使用 `-S` 参数指定 chezmoi 管理目录为 `~/.local/share/chezmoi-niri/`，不干扰其他配置备份。
+
+- 推荐同时使用我的 [dotfiles 配置](https://github.com/jalaxy33/dotfiles)，以获得更好的体验。
+
+  > 如果你使用的是 archlinux，在用 chezmoi 拉取我的 dotfiles 配置并重启终端后，执行 `ensure-niri-depends` 命令 可以自动安装所有必需依赖。
+
+### 使用本仓库配置
 
 - 在新机器上从 Github 上拉取配置
 
@@ -49,7 +53,7 @@ niri 使用 [DMS](https://danklinux.com/) 预设。如果需要使用我的配�
   chezmoi apply -S ~/.local/share/chezmoi-niri/ <path-to-file>
   ```
 
-查看配置差异：
+### 查看配置差异
 
 - 查看有哪些文件发生了变动：
 
@@ -63,7 +67,7 @@ niri 使用 [DMS](https://danklinux.com/) 预设。如果需要使用我的配�
   chezmoi diff -S ~/.local/share/chezmoi-niri/
   ```
 
-处理配置冲突：
+### 处理配置冲突
 
 - 进入 chezmoi 管理仓库后用 git 处理：
 
