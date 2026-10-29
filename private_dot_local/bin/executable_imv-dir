@@ -1,6 +1,12 @@
-#!/bin/sh -efu
-if [ $# -gw 2 ]; then
+#!/bin/sh -eu
+# Open a file in imv, with the other files of its directory as the list.
+if [ $# -ne 1 ]; then
   exec imv "$@"
-else
-  exec imv -n "$1" $(ls "$(dirname "$1")" | sort -n)
 fi
+
+dir=$(dirname -- "$1")
+set -- "$1"
+for file in "$dir"/*; do
+  set -- "$@" "$file"
+done
+exec imv -n "$@"
